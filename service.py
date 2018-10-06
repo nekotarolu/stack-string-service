@@ -67,4 +67,4 @@ def is_empty_route(target):
 
 
 if __name__ == "__main__":
-        run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+        run(host=config.SERVER_HOST_ADDR, port=int(os.environ.get("PORT", config.SERVER_HOST_PORT)))
