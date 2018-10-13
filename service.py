@@ -45,7 +45,7 @@ def pop_stack_route(target):
         result = model.pop_stack(target)
         if result is None:
                 abort(404, "No such database.")
-        response.headers['Acess-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Origin'] = '*'
         return str(result)
 
 
