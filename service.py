@@ -1,12 +1,10 @@
 ﻿import datetime
 import os
 import sqlite3
-from bottle import route, request, abort, run
+from bottle import route, request, abort, run, response
 
 import config
 import model
-
-_GLOBAL_TARGET_="global"
 
 @route("/")
 def welcome_service():
@@ -20,7 +18,8 @@ def welcome_service():
                 print("-- database setup success --")
         else:
                 print("-- database setup failed --")
-       
+
+        response.headers['Access-Control-Allow-Origin'] = '*'
         return "Welcome to the StackStringService!!"
 
 
@@ -32,6 +31,7 @@ def push_stack_route_global():
 @route("/PushStack/<target>", method=['PUT', 'POST'])
 def push_stack_route(target):
         model.push_stack(target, request.query.string)
+        response.headers['Access-Control-Allow-Origin'] = '*'
         return 'OK'
 
 
@@ -45,6 +45,7 @@ def pop_stack_route(target):
         result = model.pop_stack(target)
         if result is None:
                 abort(404, "No such database.")
+        response.headers['Access-Control-Allow-Origin'] = '*'
         return str(result)
 
 
@@ -63,6 +64,7 @@ def is_empty_route(target):
         else:
                 print("isEmpty false.")
 
+        response.headers['Access-Control-Allow-Origin'] = '*'
         return "isEmpty call."
 
 
